@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.Nullable;
 
@@ -14,10 +15,10 @@ public class GraphicView extends View {
 
     Paint paintBg;
     Paint paintInk;
-    float widt;
+    float width;
     float height;
-    int orientation =this.getResources().getConfiguration().orientation;
-
+    int orientation = this.getResources().getConfiguration().orientation;
+    Button btnNew;
 
 
     public GraphicView(Context context, @Nullable AttributeSet attrs) {
@@ -25,51 +26,51 @@ public class GraphicView extends View {
         Log.d("orientiation=", String.valueOf(orientation));
 
     }
+
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onDraw(Canvas canvas) {
 
 
-
         super.onDraw(canvas);
-        int plus=0;
-        final float width= (float) (MainActivity.widthPh*0.75);
-        final float height=(float) (MainActivity.heightPh*0.75);
-       // Log.d("phisical heigt=", String.valueOf(MainActivity.heightPh));
-        //Log.d("phisical width=", String.valueOf(MainActivity.widthPh));
-       // Log.d("heigt=", String.valueOf(height));
-        //Log.d(" width=", String.valueOf(width));
-        float one_third_size=width/3;
-        float one_height_size=height/3;
+        int plus = 0;
         paintBg = new Paint();
         paintBg.setColor(R.color.white);
         paintBg.setStyle(Paint.Style.FILL);
-        if(orientation ==1){
-            canvas.drawRect((plus+(MainActivity.widthPh-width)/2),width/100,(MainActivity.widthPh+width)/2,width,paintBg);
-        }
-
-        else
-            plus=0;
-
-        canvas.drawRect((plus+(MainActivity.widthPh-width)/2),width/100,(MainActivity.widthPh+width)/2,width,paintBg);
-        //canvas.drawRect(MainActivity.widthPh-width,0,(MainActivity.widthPh-width)/2+width,550,paintBg);
-        paintInk=new Paint();
+        paintInk = new Paint();
         paintInk.setColor(R.color.black);
         paintInk.setStyle(Paint.Style.STROKE);
         paintInk.setStrokeWidth(20);
-        //canvas.drawLine(((getWidth()-width)/2)+30,one_third_size,height,one_height_size,paintInk);
-        //canvas.drawLine(30,one_third_size*2,width-40,one_third_size*2,paintInk);
-        //canvas.drawLine(one_third_size,40,one_third_size,width-40,paintInk);
-        //canvas.drawLine(one_third_size*2,40,one_third_size*2,width-40,paintInk);
+        if (orientation == 1) {
+            portraitOrientation(canvas);
+        } else {
+            landscapeOrientation(canvas);
+        }
+
 
     }
 
-    private void portraitOrientation(){
-
+    private void portraitOrientation(Canvas canvas) {
+        width = this.getWidth();
+        float one_third_width_size = width / 3;
+        canvas.drawLine(30, one_third_width_size, width - 30, one_third_width_size, paintInk);
+        canvas.drawLine(30, one_third_width_size * 2, width - 30, one_third_width_size * 2, paintInk);
+        canvas.drawLine(one_third_width_size, 30, one_third_width_size, width - 30, paintInk);
+        canvas.drawLine(one_third_width_size * 2, 30, one_third_width_size * 2, width - 30, paintInk);
+        btnNew=new Button(getContext());
     }
 
-    private void landscapeOrientation(){
+    private void landscapeOrientation(Canvas canvas) {
+        height = this.getHeight();
+        width = this.getWidth();
+        float one_third_height_size = height / 3;
+        float one_half_width_size = (width / 2);
+        float startPos = (one_half_width_size - height / 2);
 
+        canvas.drawLine(startPos + 30, one_third_height_size, startPos + height - 30, one_third_height_size, paintInk);
+        canvas.drawLine(startPos + 30, one_third_height_size * 2, startPos + height - 30, one_third_height_size * 2, paintInk);
+        canvas.drawLine(startPos + one_third_height_size, 30, startPos + one_third_height_size, height - 30, paintInk);
+        canvas.drawLine(startPos + one_third_height_size * 2, 30, startPos + one_third_height_size * 2, height - 30, paintInk);
     }
 
 }
