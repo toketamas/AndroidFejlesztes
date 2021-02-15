@@ -23,8 +23,8 @@ public class GraphicView extends View {
     private float width;
     private float height;
     private int orientation = this.getResources().getConfiguration().orientation;
-    private int rowNumber=3;
-    private int columnNumber=3;
+    private int rowNumber=7;
+    private int columnNumber=7;
     private List<Integer> endOfRow;
     private List<Integer> endOfColumn;
     //private static PointF touchedPoint;
@@ -49,7 +49,7 @@ public class GraphicView extends View {
     public static void touch(PointF pointF){
         Log.d("point x=", String.valueOf(pointF.x));
         Log.d("point y=", String.valueOf(pointF.y));
-        for (int i=0; i<endOf)
+        //for (int i=0; i<endOf)
 
     }
 

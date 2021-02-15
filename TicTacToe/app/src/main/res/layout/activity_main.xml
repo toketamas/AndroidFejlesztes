@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity">
 
     <com.toketamas.tictactoe.GraphicView
         android:id="@+id/graphicView"
@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -21,11 +21,78 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="32dp"
         android:onClick="onClickBtn"
         android:text="@string/new_game"
         app:layout_constraintBottom_toBottomOf="@+id/graphicView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/game_level"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/Level1"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/Level1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="@string/level_1"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/Level2"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="0.587"
+        app:layout_constraintStart_toStartOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/Level4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/level_4"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/Level5"
+        app:layout_constraintEnd_toEndOf="@+id/Level3"
+        app:layout_constraintStart_toStartOf="@+id/Level3" />
+
+    <TextView
+        android:id="@+id/Level3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/level_3"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/Level4"
+        app:layout_constraintStart_toStartOf="@+id/Level2" />
+
+    <TextView
+        android:id="@+id/Level2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/level_2"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/Level3"
+        app:layout_constraintEnd_toEndOf="@+id/Level1"
+        app:layout_constraintStart_toStartOf="@+id/Level1" />
+
+    <TextView
+        android:id="@+id/Level5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="@string/level_5"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/Level4"
+        app:layout_constraintStart_toStartOf="@+id/Level4" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
