@@ -49,6 +49,8 @@ public class GraphicView extends View {
     public static void touch(PointF pointF){
         Log.d("point x=", String.valueOf(pointF.x));
         Log.d("point y=", String.valueOf(pointF.y));
+        for (int i=0; i<endOf)
+
     }
 
     @SuppressLint("ResourceAsColor")
@@ -74,11 +76,7 @@ public class GraphicView extends View {
 
     private void portraitOrientation(Canvas canvas, int padding, Paint paint) {
         width = this.getWidth();
-        float one_third_width_size = width / 3;
-        /*canvas.drawLine(30, one_third_width_size, width - 30, one_third_width_size, paintInk);
-        canvas.drawLine(30, one_third_width_size * 2, width - 30, one_third_width_size * 2, paintInk);
-        canvas.drawLine(one_third_width_size, 30, one_third_width_size, width - 30, paintInk);
-        canvas.drawLine(one_third_width_size * 2, 30, one_third_width_size * 2, width - 30, paintInk);*/
+
         for (int i = 0; i < rowNumber; i++) {
             canvas.drawLine(padding, endOfRow.get(i), width - padding, endOfRow.get(i), paint);
             Log.d("rowEnd=", endOfRow.get(i).toString());
@@ -115,8 +113,6 @@ public class GraphicView extends View {
             endOfRow.add(oneRow * i);
             endOfColumn.add(oneColumn * i);
         }
-
-
     }
 
     private void landscapeOrientation(Canvas canvas) {
