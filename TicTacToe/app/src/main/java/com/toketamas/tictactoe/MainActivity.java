@@ -42,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
 */
     }
 
+    public void klikk(View view){
+        System.out.println(view.getContext().);
+
+    }
 
     public void onClickBtn(View view){
 

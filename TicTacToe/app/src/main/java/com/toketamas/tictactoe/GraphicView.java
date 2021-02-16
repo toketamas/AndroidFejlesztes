@@ -46,6 +46,8 @@ public class GraphicView extends View {
         });
     }
 
+
+
     public static void touch(PointF pointF){
         Log.d("point x=", String.valueOf(pointF.x));
         Log.d("point y=", String.valueOf(pointF.y));
