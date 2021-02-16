@@ -23,8 +23,8 @@ public class GraphicView extends View {
     private float width;
     private float height;
     private int orientation = this.getResources().getConfiguration().orientation;
-    private int rowNumber=7;
-    private int columnNumber=7;
+    private int rowNumber=3;
+    private int columnNumber=3;
     private List<Integer> endOfRow;
     private List<Integer> endOfColumn;
     //private static PointF touchedPoint;
@@ -63,8 +63,9 @@ public class GraphicView extends View {
         paintBg = new Paint();
         paintBg.setColor(R.color.white);
         paintBg.setStyle(Paint.Style.FILL);
+        paintBg.setColor(Color.WHITE);
         paintInk = new Paint();
-        paintInk.setColor(R.color.black);
+        paintInk.setColor(Color.GRAY);
         paintInk.setStyle(Paint.Style.STROKE);
         paintInk.setStrokeWidth(20);
         if (orientation == 1) {
@@ -76,6 +77,7 @@ public class GraphicView extends View {
 
     private void portraitOrientation(Canvas canvas, int padding, Paint paint) {
         width = this.getWidth();
+        canvas.drawColor(Color.WHITE);
 
         for (int i = 0; i < rowNumber; i++) {
             canvas.drawLine(padding, endOfRow.get(i), width - padding, endOfRow.get(i), paint);
@@ -90,8 +92,8 @@ public class GraphicView extends View {
 
 
 
-        //drawX(canvas, 130, 130, 350, 350, paintInk);
-        //drawO(canvas, 230, 730, 130, paintInk);
+        drawX(canvas, 130, 130, 350, 350, paintInk);
+        drawO(canvas, 230, 730, 130, paintInk);
     }
 
     private void setCellCoordinates(Canvas canvas) {
@@ -146,7 +148,7 @@ public class GraphicView extends View {
 
     private void drawX(Canvas canvas, float left, float top, float right, float bottom, Paint paint) {
 //X kirajzolása
-        paint.setColor(Color.GREEN);
+        paint.setColor(Color.rgb(29,133,57));
         paint.setStrokeWidth(80);
         canvas.drawLine(left, top, right, bottom, paint);
         canvas.drawLine(right, top, left, bottom, paint);
