@@ -41,16 +41,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("klikk", "Button click");
     }
 
-    public void onClickView(View v) {
-        Log.d("klikk", "klikk");
-       PointF pointF = new PointF();
 
-
-
-        //GraphicView.touch(pointF);
-        Log.d("point x=", ""+v.getTranslationX());
-        Log.d("point y=", ""+v.getTranslationY());
     }
 
 
-}
