@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-        <string name="app_name">TicTacToe</string>
-        <string name="new_game">Új játék</string>
-        <string name="level_1">3 X 3</string>
-        <string name="level_4">6 X 6</string>
-        <string name="level_2">4 X 4</string>
-        <string name="level_3">5 X 5</string>
-        <string name="game_level">Nehézségi szint</string>
-        <string name="level_5">7 X 7</string>
+    <string name="app_name">TicTacToe</string>
+    <string name="new_game">Új játék</string>
+    <string name="level_1">3 X 3</string>
+    <string name="level_4">6 X 6</string>
+    <string name="level_2">4 X 4</string>
+    <string name="level_3">5 X 5</string>
+    <string name="game_level">Nehézségi szint</string>
+    <string name="level_5">7 X 7</string>
+    <string name="author">2021 TFSoft www.tfsoft.hu</string>
 </resources>

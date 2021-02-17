@@ -1,6 +1,7 @@
 package com.toketamas.tictactoe;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,6 +11,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
@@ -18,13 +20,14 @@ import java.util.List;
 
 public class GraphicView extends View {
 
+
     private Paint paintBg;
     private Paint paintInk;
     private float width;
     private float height;
     private int orientation = this.getResources().getConfiguration().orientation;
-    private int rowNumber=3;
-    private int columnNumber=3;
+    private static int rowNumber=3;
+    private static int columnNumber=3;
     private List<Integer> endOfRow;
     private List<Integer> endOfColumn;
     //private static PointF touchedPoint;
@@ -47,6 +50,12 @@ public class GraphicView extends View {
     }
 
 
+
+ public void txtFieldClick(int row,int column){
+        rowNumber=row;
+        columnNumber=column;
+        invalidate();
+ }
 
     public static void touch(PointF pointF){
         Log.d("point x=", String.valueOf(pointF.x));
@@ -94,8 +103,8 @@ public class GraphicView extends View {
 
 
 
-        drawX(canvas, 130, 130, 350, 350, paintInk);
-        drawO(canvas, 230, 730, 130, paintInk);
+        //drawX(canvas, 130, 130, 350, 350, paintInk);
+        //drawO(canvas, 230, 730, 130, paintInk);
     }
 
     private void setCellCoordinates(Canvas canvas) {
