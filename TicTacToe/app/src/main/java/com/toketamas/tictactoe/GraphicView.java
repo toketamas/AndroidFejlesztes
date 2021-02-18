@@ -30,8 +30,9 @@ public class GraphicView extends View {
     private static int columnNumber = 3;
     private List<Integer> endOfRow;
     private List<Integer> endOfColumn;
-    public List<X> listX;
+    public List<X> listX=new ArrayList<>();
     public List<O> listO=new ArrayList<O>();
+    X array[][]=new X[rowNumber][columnNumber];;
     Canvas canvas;
     //private static PointF touchedPoint;
 
@@ -39,17 +40,16 @@ public class GraphicView extends View {
     public GraphicView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         Log.d("orientiation=", String.valueOf(orientation));
-
-
     }
 
-
+//beállítja a választott táblaméretet
     public void txtFieldClick(int row, int column) {
         rowNumber = row;
         columnNumber = column;
+        array=new X[rowNumber][columnNumber];
         invalidate();
     }
-
+//meghatározza a cellát amit megérintett a játékos
     public void touch(PointF pointF) {
 
         PointF start = new PointF(0, 0);
@@ -67,16 +67,11 @@ public class GraphicView extends View {
         }
         Log.d("koordináták: ", "left: " + start.x + " top: " + start.y + " right: " + end.x + " bottom: " + end.y);
         if(end.y!=0){
-            listO.add(new O(start,end));
+            listX.add(new X(start,end));
         }
-
-
-
-
-        //for (int i=0; i<endOf)
-
     }
 
+//rajzolásért felelős függvény
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onDraw(Canvas canvas) {
@@ -97,50 +92,50 @@ public class GraphicView extends View {
         } else {
             landscapeOrientation();
         }
-        /*setOnTouchListener(new GraphicView.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                PointF pointF = new PointF();
-                pointF.x = event.getX();
-                pointF.y = event.getY();
-                touch(canvas,pointF);
-                return true;
-            }
-        });*/
-    }
 
+    }
+//játékmező és figurák kirajzolása álló helyzetben
     private void portraitOrientation(int padding, Paint paint) {
         width = this.getWidth();
         canvas.drawColor(Color.WHITE);
         paint.setStrokeWidth(30 / rowNumber * 2);
-
+//sorok kirajzolása
         for (int i = 1; i < rowNumber; i++) {
             canvas.drawLine(padding, endOfRow.get(i), width - padding, endOfRow.get(i), paint);
             Log.d("rowEnd=", endOfRow.get(i).toString());
             Log.d("rowEndNum=", String.valueOf(i));
         }
+//oszlopok kirajzolása
         for (int i = 1; i < rowNumber; i++) {
             canvas.drawLine(endOfColumn.get(i), padding, endOfColumn.get(i), width - padding, paint);
             Log.d("rowEnd=", endOfRow.get(i).toString());
             Log.d("rowEndNum=", String.valueOf(i));
         }
-        if(listO.size()!=0) {
+
+//O-k kirajzolása
+        if (listO.size() != 0) {
             for (int i = 0; i < listO.size(); i++) {
                 O o = listO.get(i);
                 paint.setColor(Color.RED);
-                paint.setStrokeWidth(60/rowNumber*3);
-
+                paint.setStrokeWidth(60 / rowNumber * 3);
                 canvas.drawCircle(o.getMiddleOfCircle().x, o.getMiddleOfCircle().y, o.getRadius(), paintInk);
             }
-
-
         }
-
+//X-k kirajzolása
+        float deg= (float)(60/rowNumber*3);
+        if (listX.size() != 0) {
+            for (int i = 0; i < listX.size(); i++) {
+                X x = listX.get(i);
+                paint.setColor(Color.rgb(29, 133, 57));
+                paint.setStrokeWidth(60 / rowNumber * 3);
+                canvas.drawLine(x.getStart().x+deg,x.getStart().y+deg,x.getEnd().x-deg,x.getEnd().y-deg,paintInk);
+                canvas.drawLine(x.getStart().x+deg,x.getEnd().y-deg,x.getEnd().x-deg,x.getStart().y+deg,paintInk);
+            }
+        }
     }
 
-
+//listakészítés a tábla mezőinek kezdő és záró koordinátáiról a választott táblaméret alapján
     private void setCellCoordinates() {
-
         int oneRow = 0;
         int cSize = canvas.getWidth();
         int oneColumn = cSize / columnNumber;
@@ -155,14 +150,12 @@ public class GraphicView extends View {
             endOfRow.add(cSize);
             endOfColumn.add(cSize);
         }
-
-
         for (int i = 0; i < rowNumber; i++) {
             endOfRow.add(oneRow * i);
             endOfColumn.add(oneColumn * i);
         }
     }
-
+//telefon fekvő helyzet 3x3 rács kirajzolása nem használjuk(az elfordítás tiltva van)
     private void landscapeOrientation() {
         height = this.getHeight();
         width = this.getWidth();
@@ -176,33 +169,10 @@ public class GraphicView extends View {
         canvas.drawLine(startPos + one_third_height_size * 2, 30, startPos + one_third_height_size * 2, height - 30, paintInk);
     }
 
-
     private void setSymbol(int orientation, boolean symbol) {
-        //cellák helyzete, berajzolás a cellába
-        //symbol=true: X
-        //symbol=false: O
 
     }
 
-    private void drawO(PointF start, PointF end, Paint paint) {
-//kör kirajzolása
 
-        float coordinateX = (start.x + end.x) / 2;
-        float coordinateY = (start.y + end.y) / 2;
-        float radius = end.x - start.x;
-        paint.setColor(Color.RED);
-        paint.setStrokeWidth(80);
-        canvas.drawCircle(coordinateX, coordinateY, radius, paint);
-        Log.d("coordinate: ", coordinateX + "," + coordinateY + " r: " + radius);
-        invalidate();
-    }
 
-    private void drawX(PointF start, PointF end, Paint paint) {
-//X kirajzolása
-        paint.setColor(Color.rgb(29, 133, 57));
-        paint.setStrokeWidth(10);
-        canvas.drawLine(start.x + 10, start.y + 10, end.x - 10, end.y - 10, paint);
-
-        // canvas.drawLine(riginvht+10, top+10, left-10, bottom-10, paint);
-    }
 }

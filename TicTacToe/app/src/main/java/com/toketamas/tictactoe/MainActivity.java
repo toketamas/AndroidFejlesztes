@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         textLevel.setTextColor(Color.GRAY);
         levelLayout.setVisibility(View.VISIBLE);
         graphicView.listO.clear();
+        graphicView.listX.clear();
         graphicView.invalidate();
     }
 

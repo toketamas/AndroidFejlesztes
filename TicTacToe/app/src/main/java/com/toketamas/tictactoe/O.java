@@ -12,6 +12,7 @@ public class O extends X {
     public O(PointF start, PointF end) {
         super(start, end);
         color= Color.RED;
+        final String type="O";
     }
 
     public PointF getMiddleOfCircle(){

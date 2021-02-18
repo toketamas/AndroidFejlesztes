@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TicTacToe</string>
+    <string name="app_name">Amőba(TicTacToe)</string>
     <string name="new_game">Új játék</string>
     <string name="level_1">3 X 3</string>
     <string name="level_4">6 X 6</string>

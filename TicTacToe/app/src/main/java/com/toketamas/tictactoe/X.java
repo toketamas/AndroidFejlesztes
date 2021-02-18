@@ -9,6 +9,9 @@ public class X {
 
 
 
+    final String type="X";
+
+
     int color=Color.rgb(29, 133, 57);
 
     public X(){};
@@ -16,6 +19,10 @@ public class X {
     public X(PointF start, PointF end) {
         this.start = start;
         this.end = end;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public PointF getStart() {
