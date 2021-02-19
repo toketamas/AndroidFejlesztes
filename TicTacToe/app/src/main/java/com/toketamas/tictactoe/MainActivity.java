@@ -71,8 +71,9 @@ public class MainActivity extends AppCompatActivity {
         textLevel.setText(R.string.game_level);
         textLevel.setTextColor(Color.GRAY);
         levelLayout.setVisibility(View.VISIBLE);
-        graphicView.listO.clear();
-        graphicView.listX.clear();
+        //graphicView.listO.clear();
+        //graphicView.listX.clear();
+        //graphicView.array = null;
         graphicView.invalidate();
     }
  // a gép lépése
