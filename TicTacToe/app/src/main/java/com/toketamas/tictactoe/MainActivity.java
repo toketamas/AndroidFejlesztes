@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 graphicView.touch(pointF);
                 graphicView.invalidate();
+                aI();
                 return false;
             }
         });
@@ -73,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
         graphicView.listO.clear();
         graphicView.listX.clear();
         graphicView.invalidate();
+    }
+ // a gép lépése
+    public void aI(){
+
     }
 
 

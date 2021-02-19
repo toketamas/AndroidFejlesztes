@@ -54,15 +54,19 @@ public class GraphicView extends View {
 
         PointF start = new PointF(0, 0);
         PointF end = new PointF(0, 0);
+        int row;
+        int column;
 
         for (int i = 0; i < endOfColumn.size() - 1; i++) {
             if (pointF.x > endOfColumn.get(i) && pointF.x < endOfColumn.get(i + 1)) {
                 start.x = endOfColumn.get(i);
                 end.x = endOfColumn.get(i + 1);
+                row=i;
             }
             if (pointF.y > endOfRow.get(i) && pointF.y < endOfRow.get(i + 1)) {
                 start.y = endOfRow.get(i);
                 end.y = endOfRow.get(i + 1);
+                column=i;
             }
         }
         Log.d("koordináták: ", "left: " + start.x + " top: " + start.y + " right: " + end.x + " bottom: " + end.y);
@@ -76,7 +80,6 @@ public class GraphicView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         this.canvas = canvas;
         setCellCoordinates();
         paintBg = new Paint();
@@ -99,6 +102,7 @@ public class GraphicView extends View {
         width = this.getWidth();
         canvas.drawColor(Color.WHITE);
         paint.setStrokeWidth(30 / rowNumber * 2);
+
 //sorok kirajzolása
         for (int i = 1; i < rowNumber; i++) {
             canvas.drawLine(padding, endOfRow.get(i), width - padding, endOfRow.get(i), paint);
@@ -106,6 +110,7 @@ public class GraphicView extends View {
             Log.d("rowEndNum=", String.valueOf(i));
         }
 //oszlopok kirajzolása
+
         for (int i = 1; i < rowNumber; i++) {
             canvas.drawLine(endOfColumn.get(i), padding, endOfColumn.get(i), width - padding, paint);
             Log.d("rowEnd=", endOfRow.get(i).toString());
@@ -121,6 +126,7 @@ public class GraphicView extends View {
                 canvas.drawCircle(o.getMiddleOfCircle().x, o.getMiddleOfCircle().y, o.getRadius(), paintInk);
             }
         }
+
 //X-k kirajzolása
         float deg= (float)(60/rowNumber*3);
         if (listX.size() != 0) {
