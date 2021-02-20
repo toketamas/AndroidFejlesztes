@@ -40,7 +40,7 @@ public class GraphicView extends View {
 
     public GraphicView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        Log.d("orientiation=", String.valueOf(orientation));
+
         //array = new XO[rowNumber][columnNumber];
     }
 
@@ -64,18 +64,23 @@ public class GraphicView extends View {
             if (pointF.x > endOfColumn.get(i) && pointF.x < endOfColumn.get(i + 1)) {
                 start.x = endOfColumn.get(i);
                 end.x = endOfColumn.get(i + 1);
-                row = 0;
+                row = i;
+                Log.d("##row: ",String.valueOf(row));
+
             }
             if (pointF.y > endOfRow.get(i) && pointF.y < endOfRow.get(i + 1)) {
                 start.y = endOfRow.get(i);
                 end.y = endOfRow.get(i + 1);
-                column = 0;
+                column = i;
+                Log.d("##column: ",String.valueOf(column));
             }
         }
         Log.d("koordináták: ", "left: " + start.x + " top: " + start.y + " right: " + end.x + " bottom: " + end.y);
         if (end.y != 0) {
             //listX.add(new X(start,end,row,column));
-            array[row][column] = new O(start, end, row, column, rowNumber,paintInk);
+            array[0][0] = new O(start, end, row, column, rowNumber,paintInk);
+            array[1][1]=new X(start, end, row, column, rowNumber,paintInk);
+            Log.d("1,1 ",String.valueOf(array[1][1].row+"  "+array[1][1].column));
         }
     }
 

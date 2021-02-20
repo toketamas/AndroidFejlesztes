@@ -7,13 +7,14 @@ import android.graphics.PointF;
 
 public class X extends XO {
 
+    public X(){}
+
     public X(PointF start, PointF end, int row, int column, int rowNumber, Paint paint)
     {
         super(start, end, row, column, rowNumber,paint);
         color = Color.rgb(29, 133, 57);
         type = "X";
     }
-
 
     @Override
     void drawObject(Canvas canvas) {

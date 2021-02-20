@@ -14,7 +14,7 @@ abstract class XO {
     protected Paint paint;
     protected int rowNumber;
 
-   public XO(PointF start, PointF end, int row, int column, int rowNumber,Paint paint) {
+   protected XO(PointF start, PointF end, int row, int column, int rowNumber,Paint paint) {
         this.start = start;
         this.end = end;
         this.row = row;
@@ -24,12 +24,9 @@ abstract class XO {
         paint.setStrokeWidth(30);
     }
 
-    public XO() {
-
-    }
+    public XO() { }
 
     abstract void drawObject(Canvas canvas);
-
 
     public void setType(String type) {
         this.type = type;
@@ -80,7 +77,6 @@ abstract class XO {
     public void setColumn(int column) {
         this.column = column;
     }
-
 
     public void setEnd(PointF end) {
         this.end = end;
