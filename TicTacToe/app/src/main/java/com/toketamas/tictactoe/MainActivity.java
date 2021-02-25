@@ -3,15 +3,10 @@ package com.toketamas.tictactoe;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.ContentProviderClient;
-import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.os.Bundle;
-import android.text.Layout;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -24,7 +19,10 @@ public class MainActivity extends AppCompatActivity {
     public static int heightPh = Resources.getSystem().getDisplayMetrics().heightPixels;
     public static int widthPh = Resources.getSystem().getDisplayMetrics().widthPixels;
     TextView textLevel;
-    String gameLevel="3 X 3";
+    String gameLevel = "3 X 3";
+    XO xo;
+    //Ez a változó tatalmazza az ellenfél típusát 0=AI 1=másik játékos ezen az eszközön 2=hálózat
+    int opponent = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         textLevel = findViewById(R.id.textLevel);
         levelLayout.setEnabled(false);
         int ori = this.getResources().getConfiguration().orientation;
+
         graphicView.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             @Override
@@ -43,14 +42,15 @@ public class MainActivity extends AppCompatActivity {
                 PointF pointF = new PointF();
                 pointF.x = event.getX();
                 pointF.y = event.getY();
-                if(pointF.y<graphicView.getWidth()) {
+                if (pointF.y < graphicView.getWidth()) {
                     textLevel.setText(gameLevel);
                     textLevel.setTextColor(Color.BLUE);
                     levelLayout.setVisibility(View.INVISIBLE);
                 }
                 graphicView.touch(pointF);
                 graphicView.invalidate();
-                aI();
+                if (graphicView.gameEnd())
+                    opponentNextSteps();
                 return false;
             }
         });
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         int valueX = Integer.parseInt(String.valueOf((txt.getText().charAt(0))));
         int valueY = Integer.parseInt(String.valueOf((txt.getText().charAt(4))));
         graphicView.txtFieldClick(valueX, valueY);
-        gameLevel=txt.getText().toString();
+        gameLevel = txt.getText().toString();
     }
 
     public void onClickBtn(View view) {
@@ -71,9 +71,16 @@ public class MainActivity extends AppCompatActivity {
         graphicView.listXO.clear();
         graphicView.invalidate();
     }
- // a gép lépése
-    public void aI(){
 
+    // a gép lépése
+    public void opponentNextSteps() {
+        if (opponent == 0) {
+            xo = new X(graphicView.paintInk);
+            AI ai = new AI(graphicView.listXO, graphicView.endOfRow, graphicView.endOfColumn, graphicView.rowNumber, xo);
+            graphicView.listXO = ai.nextStep();
+            graphicView.invalidate();
+
+        }
     }
 
 

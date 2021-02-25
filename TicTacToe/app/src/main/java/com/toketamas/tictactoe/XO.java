@@ -14,17 +14,24 @@ abstract class XO {
     protected Paint paint;
     protected int rowNumber;
 
-   protected XO(PointF start, PointF end, int row, int column, int rowNumber,Paint paint) {
+    protected XO(Paint paint) {
+        this.paint = paint;
+        paint.setStrokeWidth(30);
+    }
+
+    protected XO(PointF start, PointF end, int row, int column, int rowNumber, Paint paint) {
         this.start = start;
         this.end = end;
         this.row = row;
         this.column = column;
         this.rowNumber = rowNumber;
-        this.paint=paint;
+        this.paint = paint;
         paint.setStrokeWidth(30);
     }
 
-    public XO() { }
+
+    public XO() {
+    }
 
     abstract void drawMe(Canvas canvas);
 
@@ -64,7 +71,9 @@ abstract class XO {
         return end;
     }
 
-    public int getRow() {return row; }
+    public int getRow() {
+        return row;
+    }
 
     public void setRow(int row) {
         this.row = row;

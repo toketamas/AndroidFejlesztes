@@ -8,7 +8,11 @@ import android.graphics.PointF;
 
 public class O extends XO {
 
-    public O(){}
+    public O(Paint paint) {
+        super(paint);
+        color=Color.RED;
+        type = "O";
+    }
 
     public O(PointF start, PointF end, int row, int column, int rowNumber, Paint paint) {
         super(start, end, row, column, rowNumber,paint);
@@ -28,8 +32,10 @@ public class O extends XO {
         pointF.x=coordinateX;
         pointF.y=coordinateY;
         paint.setColor(Color.RED);
-        paint.setStrokeWidth(60 / rowNumber * 3);
+        paint.setStrokeWidth(75 / rowNumber * 3);
         canvas.drawCircle(pointF.x, pointF.y, getRadius(), paint);
 
     }
+
+
 }

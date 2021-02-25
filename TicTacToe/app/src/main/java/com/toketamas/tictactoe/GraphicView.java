@@ -19,14 +19,14 @@ public class GraphicView extends View {
 
 
     private Paint paintBg;
-    private Paint paintInk;
+    public Paint paintInk;
     private float width;
     private float height;
     private int orientation = this.getResources().getConfiguration().orientation;
-    private static int rowNumber = 3;
+    public static int rowNumber = 3;
     private static int columnNumber = 3;
-    private List<Integer> endOfRow;
-    private List<Integer> endOfColumn;
+    public List<Integer> endOfRow;
+    public List<Integer> endOfColumn;
     public List<XO> listXO = new ArrayList<XO>();
     Canvas canvas;
 
@@ -66,10 +66,12 @@ public class GraphicView extends View {
                 break;
             }
         }
-
-        if (end.y != 0) {
+        XO selected=blankCell(row,column);
+        if ((end.y != 0) && (selected==null)) {
             listXO.add(new O(start, end, row, column, rowNumber, paintInk));
         }
+        else
+            Log.d("nem üres ",row+" , "+column+", "+selected.type);
     }
 
     //rajzolásért felelős függvény
@@ -156,5 +158,22 @@ public class GraphicView extends View {
         canvas.drawLine(startPos + 30, one_third_height_size * 2, startPos + height - 30, one_third_height_size * 2, paintInk);
         canvas.drawLine(startPos + one_third_height_size, 30, startPos + one_third_height_size, height - 30, paintInk);
         canvas.drawLine(startPos + one_third_height_size * 2, 30, startPos + one_third_height_size * 2, height - 30, paintInk);
+    }
+
+    public XO blankCell(int row,int column){
+       for (int i=0;i<listXO.size();i++){
+           if((listXO.get(i).row==row) && (listXO.get(i).column==column)){
+               return listXO.get(i);
+           }
+       }
+       return null;
+    }
+
+    public boolean gameEnd(){
+        boolean result=false;
+        if(listXO.size()<rowNumber*rowNumber){
+            result=true;
+        }
+        return result;
     }
 }
