@@ -26,7 +26,7 @@ abstract class XO {
 
     public XO() { }
 
-    abstract void drawObject(Canvas canvas);
+    abstract void drawMe(Canvas canvas);
 
     public void setType(String type) {
         this.type = type;

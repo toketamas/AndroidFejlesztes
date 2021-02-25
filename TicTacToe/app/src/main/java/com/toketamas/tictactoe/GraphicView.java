@@ -1,7 +1,6 @@
 package com.toketamas.tictactoe;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -9,9 +8,7 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
@@ -30,57 +27,48 @@ public class GraphicView extends View {
     private static int columnNumber = 3;
     private List<Integer> endOfRow;
     private List<Integer> endOfColumn;
-    // public List<X> listX=new ArrayList<>();
-    // public List<O> listO=new ArrayList<O>();
-    XO array[][]= new XO[rowNumber][columnNumber];;
-    ;
+    public List<XO> listXO = new ArrayList<XO>();
     Canvas canvas;
-    //private static PointF touchedPoint;
-
 
     public GraphicView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-
-        //array = new XO[rowNumber][columnNumber];
     }
 
     //beállítja a választott táblaméretet
     public void txtFieldClick(int row, int column) {
         rowNumber = row;
         columnNumber = column;
-        array = new XO[rowNumber][columnNumber];
         invalidate();
     }
 
     //meghatározza a cellát amit megérintett a játékos
     public void touch(PointF pointF) {
-
         PointF start = new PointF(0, 0);
         PointF end = new PointF(0, 0);
-        int row = -1;
-        int column = -1;
+        int row = 0;
+        int column = 0;
 
         for (int i = 0; i < endOfColumn.size() - 1; i++) {
             if (pointF.x > endOfColumn.get(i) && pointF.x < endOfColumn.get(i + 1)) {
                 start.x = endOfColumn.get(i);
                 end.x = endOfColumn.get(i + 1);
                 row = i;
-                Log.d("##row: ",String.valueOf(row));
-
+                Log.d("##row: ", String.valueOf(row));
+                break;
             }
+        }
+        for (int i = 0; i < endOfColumn.size() - 1; i++) {
             if (pointF.y > endOfRow.get(i) && pointF.y < endOfRow.get(i + 1)) {
                 start.y = endOfRow.get(i);
                 end.y = endOfRow.get(i + 1);
                 column = i;
-                Log.d("##column: ",String.valueOf(column));
+                Log.d("##column: ", String.valueOf(column));
+                break;
             }
         }
-        Log.d("koordináták: ", "left: " + start.x + " top: " + start.y + " right: " + end.x + " bottom: " + end.y);
+
         if (end.y != 0) {
-            //listX.add(new X(start,end,row,column));
-            array[0][0] = new O(start, end, row, column, rowNumber,paintInk);
-            array[1][1]=new X(start, end, row, column, rowNumber,paintInk);
-            Log.d("1,1 ",String.valueOf(array[1][1].row+"  "+array[1][1].column));
+            listXO.add(new O(start, end, row, column, rowNumber, paintInk));
         }
     }
 
@@ -104,7 +92,6 @@ public class GraphicView extends View {
         } else {
             landscapeOrientation();
         }
-
     }
 
     //játékmező és figurák kirajzolása álló helyzetben
@@ -128,50 +115,13 @@ public class GraphicView extends View {
         }
 
 //XO kirajzolása
-        if (arrayAmount()!= 0) {
-            array[0][0].drawObject(canvas);
-           /* for (int i = 0; i < rowNumber; i++) {
-                for (int j = 0; j < rowNumber; j++) {
-                    array[j][i].drawObject(canvas);
-                }*/
+        if (listXO.size() != 0) {
+            for (int i = 0; i < listXO.size(); i++) {
+                listXO.get(i).drawMe(canvas);
             }
         }
-/*
-//O-k kirajzolása
-        if (listO.size() != 0) {
-            for (int i = 0; i < listO.size(); i++) {
-                O o = listO.get(i);
-                paint.setColor(Color.RED);
-                paint.setStrokeWidth(60 / rowNumber * 3);
-                canvas.drawCircle(o.getMiddleOfCircle().x, o.getMiddleOfCircle().y, o.getRadius(), paintInk);
-            }
-        }
-
-//X-k kirajzolása
-        float deg= (float)(60/rowNumber*3);
-        if (listX.size() != 0) {
-            for (int i = 0; i < listX.size(); i++) {
-                X x = listX.get(i);
-                paint.setColor(Color.rgb(29, 133, 57));
-                paint.setStrokeWidth(60 / rowNumber * 3);
-                canvas.drawLine(x.getStart().x+deg,x.getStart().y+deg,x.getEnd().x-deg,x.getEnd().y-deg,paintInk);
-                canvas.drawLine(x.getStart().x+deg,x.getEnd().y-deg,x.getEnd().x-deg,x.getStart().y+deg,paintInk);
-            }
-        }*/
-
-
-
-
-    public int arrayAmount() {
-        int amount = 0;
-        for (int i = 0; i < rowNumber; i++) {
-            for (int j = 0; j < rowNumber; j++) {
-                if (array[j][i] != null)
-                    amount++;
-            }
-        }
-        return amount;
     }
+
     //listakészítés a tábla mezőinek kezdő és záró koordinátáiról a választott táblaméret alapján
     private void setCellCoordinates() {
         int oneRow = 0;
@@ -207,10 +157,4 @@ public class GraphicView extends View {
         canvas.drawLine(startPos + one_third_height_size, 30, startPos + one_third_height_size, height - 30, paintInk);
         canvas.drawLine(startPos + one_third_height_size * 2, 30, startPos + one_third_height_size * 2, height - 30, paintInk);
     }
-
-    private void setSymbol(int orientation, boolean symbol) {
-
-    }
-
-
 }

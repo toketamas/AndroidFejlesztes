@@ -21,7 +21,7 @@ public class O extends XO {
     }
 
     @Override
-    void drawObject(Canvas canvas) {
+    void drawMe(Canvas canvas) {
         PointF pointF =new PointF();
         float coordinateX=(start.x+end.x)/2;
         float coordinateY=(start.y+end.y)/2;

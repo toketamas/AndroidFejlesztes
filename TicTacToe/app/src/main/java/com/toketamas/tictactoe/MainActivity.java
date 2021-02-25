@@ -24,9 +24,7 @@ public class MainActivity extends AppCompatActivity {
     public static int heightPh = Resources.getSystem().getDisplayMetrics().heightPixels;
     public static int widthPh = Resources.getSystem().getDisplayMetrics().widthPixels;
     TextView textLevel;
-
     String gameLevel="3 X 3";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClikLevelTxtFields(View view) {
         TextView txt = (TextView) view;
-        //rowNumber=txt.getText().toString().substring(0,1);
         int valueX = Integer.parseInt(String.valueOf((txt.getText().charAt(0))));
         int valueY = Integer.parseInt(String.valueOf((txt.getText().charAt(4))));
         graphicView.txtFieldClick(valueX, valueY);
@@ -71,9 +68,7 @@ public class MainActivity extends AppCompatActivity {
         textLevel.setText(R.string.game_level);
         textLevel.setTextColor(Color.GRAY);
         levelLayout.setVisibility(View.VISIBLE);
-        //graphicView.listO.clear();
-        //graphicView.listX.clear();
-        //graphicView.array = null;
+        graphicView.listXO.clear();
         graphicView.invalidate();
     }
  // a gép lépése

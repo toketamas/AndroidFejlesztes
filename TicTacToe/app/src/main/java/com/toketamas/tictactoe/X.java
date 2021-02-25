@@ -17,7 +17,7 @@ public class X extends XO {
     }
 
     @Override
-    void drawObject(Canvas canvas) {
+    void drawMe(Canvas canvas) {
         float deg= (float)(60/rowNumber*3);
         paint.setColor(color);
         paint.setStrokeWidth(60 / rowNumber * 3);
