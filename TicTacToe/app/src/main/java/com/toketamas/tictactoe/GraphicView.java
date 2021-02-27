@@ -42,7 +42,7 @@ public class GraphicView extends View {
     }
 
     //meghatározza a cellát amit megérintett a játékos
-    public void touch(PointF pointF) {
+    public boolean touch(PointF pointF) {
         PointF start = new PointF(0, 0);
         PointF end = new PointF(0, 0);
         int row = 0;
@@ -69,9 +69,10 @@ public class GraphicView extends View {
         XO selected=blankCell(row,column);
         if ((end.y != 0) && (selected==null)) {
             listXO.add(new O(start, end, row, column, rowNumber, paintInk));
+            return true;
         }
         else
-            Log.d("nem üres ",row+" , "+column+", "+selected.type);
+            return false;
     }
 
     //rajzolásért felelős függvény

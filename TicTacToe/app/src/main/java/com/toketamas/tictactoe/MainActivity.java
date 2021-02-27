@@ -47,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
                     textLevel.setTextColor(Color.BLUE);
                     levelLayout.setVisibility(View.INVISIBLE);
                 }
-                graphicView.touch(pointF);
+                boolean blank=graphicView.touch(pointF);
                 graphicView.invalidate();
-                if (graphicView.gameEnd())
+                if (graphicView.gameEnd() && blank)
                     opponentNextSteps();
                 return false;
             }
